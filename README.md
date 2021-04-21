@@ -16,12 +16,12 @@
    calling the operations function of the CRD class to take the user operation input.
  ## operation() function :
            now user have 6 option :
-                        1 : create :     adding the data and Create() function will be called
-                        2 : read   :     read() function will be called
-                        3 : delete :     delete() function will be called
-                        4 : clear  :     if we want to clear the screen 
-                        5 : input the file to initialise(must be 'input.txt' name)
-                        6 : exit :       stop the program
+                        1 : create :              adding the data and Create() function will be called
+                        2 : read   :              read() function will be called
+                        3 : delete :              delete() function will be called
+                        4 : clear  :              if we want to clear the screen 
+                        5 : optional file path:   input the file to initialise(must be 'input.txt' name)
+                        6 : exit :                stop the program
                         
   ## Create() function :
    will take key- value pair input from the user(eg - nickname of the person as key then JSON object as Name and the age of the person) 
@@ -33,5 +33,5 @@
    will take the input as a key(string) from the user and to check whether that particular key exist or not and give proper message accordingly.
   ## clear() function:
    this is basically to clear the console(screen).
-  ## if user choose option 5:
+  ## optional file path (option 5):
    this will take input from the file and call create() function accordingly to to create the data.  
