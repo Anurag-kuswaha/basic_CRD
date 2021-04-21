@@ -29,7 +29,7 @@ class CRD {
 ///------------------------main function------------------------------///
 int main() {
 	CRD object;                            //creating the object of CRD class
-	object.operations();                  // calling the operations function in the out main function
+	object.operations();                  // calling the operations function in the main function
 }
 
 
@@ -91,7 +91,7 @@ int hash_value(string s) {
 	int size = s.size();                  //size of the string
 	int hash = 0;                        //stores the hash vale of the string s
 	for (int i = size-1;i >= 0;i--) {
-		hash = ((hash*a + (s[i] - 'a')) % MOD) % CAPACITY; ///doijg
+		hash = ((hash*a + (s[i] - 'a')) % MOD) % CAPACITY; ///taking the ASCII value of char of string to calculate hash value.
 	}
 	return hash;
 }
