@@ -4,7 +4,7 @@
    space complexity is linear = O(n) 
    where n is the number of key-value pair
 ## Concept for storing the data
-   i have used **hashing with chaining** concept for storing the data(key-value pair) and this result in a constant time access and minimum space complexity.
+   i have used **hashing with chaining** concept for storing the data(key-value pair) and this result in a constant time access and minimum space complexity.<br/>
    **NOTE**- key- value data will be as follow : key is string (example: nickname of the person)
                                                  value is of JSON object (JSON will store two value ( example: name of the person and the age))
 ## Working
