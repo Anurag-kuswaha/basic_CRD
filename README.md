@@ -6,7 +6,7 @@
 ## Concept for storing the data
    i have used hashing with chaining concept for storing the data(key-value pair) and this result in a constant time access and minimum space complexity.
    
-## working
+## Working
    program starts execute from the main function 
    object of CRD class is created in the main function.
    
