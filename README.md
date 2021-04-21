@@ -25,13 +25,13 @@
                         
   ## Create() function :
    will take key- value pair input from the user(eg - nickname of the person as key then JSON object as Name and the age of the person) 
-   and check whether this key exist or not if not then add else give a warning message that data alreday exist.
+   and check whether this key exists or not,if not then add else give a warning message that data alreday exist.
    
   ## read() function :
-   will take the input as a key(string) from the user and to check whether that particular key exist or not and give proper message accordingly.
+   will take the input as a key(string) from the user and check whether that particular key exists or not and give proper message accordingly.
   ## delete() function:
-   will take the input as a key(string) from the user and to check whether that particular key exist or not and give proper message accordingly.
+   will take the input as a key(string) from the user and check whether that particular key exists or not and give proper message accordingly.
   ## clear() function:
    this is basically to clear the console(screen).
   ## optional file path (option 5):
-   this will take input from the file and call create() function accordingly to to create the data.  
+   this will take input from the file and call create() function accordingly to create the data.  
