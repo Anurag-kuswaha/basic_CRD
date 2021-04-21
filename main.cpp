@@ -14,7 +14,6 @@ static int a = 7;                                       // used for polynomial h
 #define CAPACITY 1000                                 //defining the capacity of the data storage of our array;
 vector<pair<string, JSON>> STORAGE[CAPACITY];        //using hashing with chaining for storing the data
 
-
 class CRD {
    private:
 	    string key;                      // key is of string type
@@ -22,6 +21,7 @@ class CRD {
 		void create();
 		void read();
 		void delete_();
+		int count;
    public: 
 		void operations(); 
 };
@@ -33,54 +33,78 @@ int main() {
 }
 
 
-///---------------------------user opeartion -----------------------///
+// -----------function to check whether age is integer or not------------//
+pair<bool,int> check_digit(string age) {  
+	int age_ = 0;
+	for (int i = 0;i < age.size();i++) {
+		if ('0' <= age[i] && age[i] <= '9') {
+			age_ = age_ * 10 + (age[i] - '0');
+		}
+		else return { 0,-1 };
+	}
+	return { 1,age_ };
+}
 
+///---------------------------user opeartion -----------------------///
 
 void CRD::operations() {
 
 	while (true) {
-		cout << "select the option\npress 1 : create\npress 2 : read\npress 3 : delete\npress 4 : clear the screen\n";
-		cout<<"press 5 : input the file to initialise(must be 'input.txt' name)\npress 6 : exit \n";
-		  int option; cin >> option;
-		  if (option == 1) {
+		cout << " select the option\n press 1 : create\n press 2 : read\n press 3 : delete\n press 4 : clear the screen\n";
+		cout << " press 5 : input the file to initialise(must be 'input.txt' name)\n press 6 : exit \n";
+		string option_; cin >> option_;
+		if (check_digit(option_).first == 0) cout << " wrong input, input must be integer type, try again \n";
+		else {
+			       int option = check_digit(option_).second;
+			       if (option == 1) {
 
-			  cout << "Enter the key \n";
-			  cin >> key;
-			  cout << "Enter the name and age\n";
-			  cin >> value.name >> value.age;
-
-			  create();  //calling the private create function to store the data if not exist
-		  }
-		  else if (option == 2) {
-			  cout << "Enter the key(must be a string) that you want to read\n";
-			  cin >> key;
-
-			  read();  //calling the private read function to read the data
-
-		  }
-		  else if (option == 3) {
-			  cout << "Enter the key(must be a string) that you want to delete\n";
-			  cin >> key;
-
-			  delete_();   //calling the private delete_ function to delete the data if exist
-		  }
-		  else if (option == 4)   system("cls");      // purpose is to clean the screen 
-		  else if (option == 5) {
-			  ifstream in("input.txt");
-			  int count = 0;
-			  while (in >> key && in >> value.name && in >> value.age) {
-				  create();
-				  count++;
-			  }
-			  cout <<"\n total "<< count << " data added successfully \n";
-		  }
-		  else if (option == 6) {
-			  cout << "abort successfully \n";  //if user input anything other than what mentioned above then close;
-			  exit(1);
-		  }
-		  else cout << "oops! belive us, you made the wrong choice try input the valid option \n";
-
-		  cout << "\n\n";
+				           cout << " Enter the key \n";
+				           cin >> key;
+				           cout << " Enter the name \n";
+				           cin >> value.name;
+				           cout << " Enter the age\n";
+				           string age_;
+				           while (1) {
+				        	        cin >> age_;
+					                if (check_digit(age_).first) { value.age = check_digit(age_).second; break; }
+					                else cout << " wrong input, input must be integer, please try again \n";
+				           }
+				           create();
+			       }
+			       else if (option == 2) {
+				           cout << " Enter the key that you want to read\n";
+			               cin >> key;
+				           read();  //calling the private read function to read the data
+ 
+			       }
+			      else if (option == 3) {
+				           cout << " Enter the key that you want to delete\n";
+				           cin >> key;
+				           delete_();   //calling the private delete_ function to delete the data if exist
+			      }
+			      else if (option == 4)   system("cls");      // purpose is to clean the screen 
+			      else if (option == 5) {
+				          ifstream in("input.txt");
+				          count = 0;
+				          string age_;
+				          while (in >> key && in >> value.name && in >> age_) {
+					                if (check_digit(age_).first) value.age = check_digit(age_).second;
+					                else {
+						            cout << " oops ! u have chossen the wrong file try to add the working file \n";
+						            break;
+					                }
+					               create();
+				          }
+				          cout << "\n total " << count << " data added successfully \n";
+			      }
+			      else if (option == 6) {
+				          cout << " abort successfully \n";  //if user input anything other than what mentioned above then close;
+				          exit(1);
+			      }
+			      else cout << " oops! belive us, you made the wrong choice try input the valid option \n";
+			   
+				  cout << "\n\n";
+		}
 	}
 }
 
@@ -91,7 +115,7 @@ int hash_value(string s) {
 	int size = s.size();                  //size of the string
 	int hash = 0;                        //stores the hash vale of the string s
 	for (int i = size-1;i >= 0;i--) {
-		hash = ((hash*a + (s[i] - 'a')) % MOD) % CAPACITY; ///taking the ASCII value of char of string to calculate hash value.
+		hash = ((hash*a + (s[i] )) % MOD) % CAPACITY; ///taking the ASCII value of char of string to calculate hash value.
 	}
 	return hash;
 }
@@ -111,7 +135,8 @@ void CRD::create() {
 	if (!key_present) {
 
 		STORAGE[hash].push_back({ key,{value.name,value.age} });   //if key not presnt already then add at the end ;
-		cout <<'\n'<<key<<" added successfully  \n";
+		cout <<"\n "<<key<<" added successfully  \n";
+		count++;
 	}
 	else       cout << "\n oops! Data already exist \n";
 
@@ -126,14 +151,14 @@ void CRD::read() {
 	bool found = false;
 	for (;i != cell.end();i++) {
 		if ((*i).first == key) {  //key found;
-			cout << "name of the person is : " << ((*i).second).name << '\n';
-			cout << "age is                : " << ((*i).second).age << '\n';
+			cout << " name of the person is : " << ((*i).second).name << '\n';
+			cout << " age is                : " << ((*i).second).age << '\n';
 			found = true;
 		}
 	}
 	if (!found) {
 		//if not found;
-		cout << "oops! there is no such directory exist in the library \n";
+		cout << " oops! there is no such directory exist in the library \n";
 	}
 
 }
@@ -154,7 +179,7 @@ void CRD::delete_() {
 	}
 	if (!found) {
 		//if not found;
-		cout << "oops! there is no such directory exist in the library \n";
+		cout << " oops! there is no such directory exist in the library \n";
 	}
-	else     cout << "successfully deleted \n";
+	else     cout << "\n " << key << " deleted successfully\n";
 }
